@@ -1,15 +1,49 @@
+import 'react-native-gesture-handler';
 import React from 'react'
 import { SafeAreaView, View, StyleSheet, Text } from 'react-native';
 
+// Importar Componentes de las pantallas
+import Login from './components/Login';
+import Nosotros from './components/Nosostros';
+
+//Importar navegacion
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// Crear el stach de nvegacion
+const Stack = createStackNavigator();
 
 const App = () => {
   return (  
     <>
-      <SafeAreaView style={ styles.mainContainer }>
-        <View style={ styles.contentContainer }>
-          <Text style={ styles.textoTitulo}>React Navegation</Text>
-        </View>
-      </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName='Login'
+        >
+          <Stack.Screen
+            name='Login'
+            component={ Login }
+            options={{
+              title: 'Login JS', // set new title
+              headerTitleAlign: 'center', // justify the content
+              headerStyle: { backgroundColor: 'red' }, // give styles to the header
+              headerShown: true, // show or hide the header
+              headerTintColor: 'yellow', // text header color
+              //headerStatusBarHeight: 30, // header heigth
+              headerTitle: 'Holaaa', // new title
+              headerTitleStyle: { fontWeight: 'bold', fontSize: 22}
+            }}
+          />
+
+          <Stack.Screen
+            name='Nosotros'
+            component={ Nosotros }
+            options={ () => ({
+              title: 'UserName'
+            })}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 }
